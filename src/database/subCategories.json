@@ -1,0 +1,28 @@
+[
+    {
+        "subcategory_id": 1,
+        "categories_id": 1,
+        "sub_categories_name": "smart phones"
+    },
+    {
+        "subcategory_id": 4,
+        "categories_id": 2,
+        "sub_categories_name": "boots"
+    },
+    {
+        "subcategory_id": 3,
+        "categories_id": 1,
+        "sub_categories_name": "television"
+    },
+    {
+        "subcategory_id": 2,
+        "categories_id": 1,
+        "sub_categories_name": "laptops"
+    },
+    {
+        "subcategory_id": 5,
+        "categories_id": 2,
+        "sub_categories_name": "shirts"
+    }
+    
+]
