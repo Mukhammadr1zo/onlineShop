@@ -2,18 +2,18 @@ import { read, write } from '../utils/model.js'
 
 const category = (req,res,{ userId }) => {
 	try{
-	if(!req.headers.token) throw 'token required'
-	let categories = read('categories')
+	if(!req.headers.token) throw 'not token'
+	let category = read('categories')
 	let subcategories = read('subCategories')
 	let product = read('products')
 	if(userId) {
-		let catData = category.filter( category => category.categoriesId == userId ) 
+		let catData = category.filter( cgy => cgy.categoriesId == userId ) 
 		return catData
 	} else {
-		for(let category of categories){
-			let subcategory = subcategories.filter(res => res.categoriesId == category.categoriesId)
-			subcategory = subcategory.filter(res => delete( res.categoriesId ))
-			category.subCategories = subcategory
+		for(let cgy of category){
+			let subcategory = subcategories.filter(val => val.categoriesId == cgy.categoriesId)
+			subcategory = subcategory.filter(val => delete( val.categoriesId ))
+			cgy.subCategories = subcategory
 		}
 		return category
 	}
@@ -22,16 +22,16 @@ const category = (req,res,{ userId }) => {
 	}
 }
 
-const subCategory = (req,res, {catId}) => {
+const subCateg = ({catId}) => {
 	try{
 	if(!req.headers.token) throw 'not token'
 	let subcategories = read('subCategories')
-	let categories = read('categories')
-	categories = categories.find(result => result.categoriesId == catId)
-	let subcategory = subcategories.filter(result => result.categoriesId == categories.categoriesId)
-	subcategories = subcategories.filter(result => delete( result.categoriesId ))
-	categories.subCategories = subcategory
-	return categories
+	let category = read('categories')
+	category =  category.find(val => val.categoriesId == catId)
+	let subcategory = subcategories.filter(val => val.categoriesId == category.categoriesId)
+	subcategories = subcategories.filter(val => delete( val.categoriesId ))
+	category.subCategories = subcategory
+	return category
 	}catch(err){
 		res.status(401).json({ status: 401, message: err })
 	} 
@@ -39,5 +39,6 @@ const subCategory = (req,res, {catId}) => {
 
 export default {
     category,
-	subCategory
+	subCateg
+
 }
